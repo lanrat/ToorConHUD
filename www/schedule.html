@@ -1,0 +1,103 @@
+<html>
+
+<head>
+    <title>Toorcon Schedule</title>
+    <style>
+        body {
+            margin: 0;
+            background: #000;
+        }
+        html, body, div {
+            height: 100%;
+            position: relative;
+        }
+        img {
+            width: 100%;
+        }
+        video, #video {
+            position: absolute;
+            top: 32.5%;
+            left: 19.5%;
+            width: 37%;
+            height: 53%;
+            /*transform: rotate(270deg);*/
+        }
+        table {
+            height: 100%;
+        }
+        #clock {
+            position: absolute;
+            top: 10%;
+            left: 12%;
+            /*transform: rotate(270deg);
+            -webkit-transform: rotate(270deg);*/
+            color: #fff;
+            font-size: 3.5vw;
+        }
+    </style>
+</head>
+
+<body>
+    <table><tr><td>
+        <img onload="set_refresh_interval(this)" src="img/track1.jpg"/>
+    </td></tr></table>
+    <p id="clock"></p>
+    <img onload="set_video_refresh_interval(this)" id="video" src=""/>
+
+    <video width="37.1%" height="53%" autoplay="false">
+        <source src="http://download.blender.org/peach/bigbuckbunny_movies/BigBuckBunny_320x180.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+
+    <script>
+    var set_refresh_interval = function(img) {
+        img.onload = '';
+
+        setInterval(function() {
+            var newsrc = img.src.replace(/\?.*$/, '') + '?' + (new Date()).toISOString();
+
+            img.src = newsrc;
+        }, 1000 * 60 * 5);
+    },
+    set_video_refresh_interval = function(img) {
+        img.onload = '';
+
+        var ip = 1 == 1 ? 60 : 8;
+        var src = "http://192.168.1." + ip + ":8888/t/cgi-bin/CGIProxy.fcgi?cmd=snapPicture2&usr=video&pwd=video";
+
+        img.src = src;
+
+        setInterval(function() {
+            var newsrc = img.src.replace(/\&t=.*$/, '') + '&t=' + (new Date()).toISOString();
+
+            img.src = newsrc;
+        }, 1000);
+    };
+
+    set_video_refresh_interval(document.getElementById("video"));
+
+    var clock = document.getElementById("clock"),
+        update_clock = function() {
+            var d = new Date();
+            var hours = d.getHours();
+            if (hours < 10) hours = "0" + hours;
+            var minutes = d.getMinutes();
+            if (minutes < 10) minutes = "0" + minutes;
+            var seconds = d.getSeconds();
+            if (seconds < 10) seconds = "0" + seconds;
+
+            clock.innerHTML = hours + ":" + minutes + ":" + seconds;
+        };
+
+    update_clock();
+    setInterval(update_clock, 1000);
+
+    var img = document.getElementsByTagName("img")[0];
+    img = document.getElementsByTagName("body")[0];
+    img.onclick = function(e) {
+        this.webkitRequestFullscreen();
+    };
+    </script>
+</body>
+
+</html>
