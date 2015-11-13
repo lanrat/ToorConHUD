@@ -1,0 +1,3 @@
+[submodule "www/js/ical.js"]
+	path = www/js/ical.js
+	url = https://github.com/mozilla-comm/ical.js.git
