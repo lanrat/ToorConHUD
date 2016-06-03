@@ -2,7 +2,7 @@
 <head>
     <title>ToorCon Schedule</title>
     <link href="css/style.css" rel="stylesheet" />
-
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js"   integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="   crossorigin="anonymous"></script>
 </head>
 <body>
 <img src="img/top.jpg" />
@@ -12,38 +12,127 @@
 
     <div id="clock" class="label-maker"></div>
     
-    <ul id="events-upcoming">
-    <li class="schedule" >
-            <div class="schedule-time">00:00</div>
-            <div class="schedule-box"><span class="schedule-speaker">Loading Schedule</span> - <span class="schedule-title">...</span></div>
-    </li>
-    </ul>
-    
+        <div id="schedule" class="schedule" >
+            <span>
+                <div class="schedule-time">00:00</div>
+                <div class="schedule-box"><span class="schedule-speaker">Loading Schedule</span><br /><span class="schedule-title">...</span></div>
+            </span>
+        </div>
+
     <img class="bottom-image" src="img/bottom.jpg" />
 </div>
 
 <script src="js/dateFormat.js"></script>
 <script src="js/clock.js"></script>
-<script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
-<script src="js/format-google-calendar.min.js"></script>
 <script>
-//https://github.com/MilanKacurak/FormatGoogleCalendar
+function ISODateString(d){
+ function pad(n){return n<10 ? '0'+n : n}
+ return d.getUTCFullYear()+'-'
+      + pad(d.getUTCMonth()+1)+'-'
+      + pad(d.getUTCDate())+'T'
+      + pad(d.getUTCHours())+':'
+      + pad(d.getUTCMinutes())+':'
+      + pad(d.getUTCSeconds())+'Z'
+}
+
+var d = new Date(2016, 5, 9); //now
+var timeMin = ISODateString(d);
+var timeMax = ISODateString(new Date(d.getFullYear(), d.getMonth(), d.getDate()+1)); // midnight
+
+</script>
+
+ <script>
+var calendars = {
+    a: 'toorcon.org_5gc3slk5srkld07gkd2ank587s%40group.calendar.google.com',
+    b: 'carlos%40toorcon.org',
+};
+var data;
+
+if (!calendars[window.location.hash.substr(1)]) {
+    window.location.hash = "#a";
+}
+
+var CALENDAR_ID = calendars[window.location.hash.substr(1)];
+
 var API_KEY = 'AIzaSyAwQwg4O6M_G1hqWxsRJMMAohIm57WmhTI';
-var CALENDAR_ID = 'toorcon.org_5gc3slk5srkld07gkd2ank587s%40group.calendar.google.com';
-formatGoogleCalendar.init({
-    calendarUrl: 'https://www.googleapis.com/calendar/v3/calendars/'+CALENDAR_ID+'/events?key='+API_KEY,
-    past: false,
-    upcoming: true,
-    sameDayTimes: true,
-    pastTopN: 20,
-    upcomingTopN: 20,
-    itemsTagName: 'li class="schedule"',
-    upcomingSelector: '#events-upcoming',
-    pastSelector: '#events-past',
-    upcomingHeading: '',
-    pastHeading: '<h2>Past events</h2>',
-    format: ['*date*', '*summary*']
-});
+var URL = 'https://www.googleapis.com/calendar/v3/calendars/'+CALENDAR_ID+'/events?key='+API_KEY+'&timeMin='+timeMin+'&timeMax='+timeMax;
+
+function trimString(str) {
+    var len = 150;
+    if(!str) {
+        return "";
+    }
+    var r = str.substring(0,len);
+    if (str.length > len) {
+        r = r + "&hellip;";
+    }
+    return r;
+}
+
+// get template
+var schedule = document.getElementById("schedule");
+var template = schedule.children[0];
+
+function renderCal() {
+    if (!data) {
+        return;
+    }
+    // remove if first load
+    template.remove();
+
+    // remove existing events
+    while (schedule.firstChild) {
+        schedule.removeChild(schedule.firstChild);
+    }
+
+    var now = new Date();
+    var events = data.items;
+    // sort
+    events.sort(function(a,b) {
+        return new Date(a.start.dateTime || a.start.date).getTime() - new Date(b.start.dateTime || b.start.date).getTime();
+    });
+
+    // add new events
+    for (var i=0; i<events.length; i++) {
+        var e = events[i];
+        var title = e.summary;
+        var description = trimString(e.description);
+        var start = new Date(e.start.dateTime);
+        var end = new Date(e.end.dateTime);
+ 
+        //console.log(title, start, end, description);
+        if (now < end) {
+            var evt = template.cloneNode(true);
+            var stime = evt.getElementsByClassName("schedule-time")[0];
+            var sspeaker = evt.getElementsByClassName("schedule-speaker")[0];
+            var stitle = evt.getElementsByClassName("schedule-title")[0];
+            stime.innerText = start.format("HH:MM");
+            sspeaker.innerHTML = title;
+            stitle.innerHTML = description;
+            if (start < now) {
+                var p = stitle.parentElement;
+                p.className = p.className + " event-current";
+            }
+            schedule.appendChild(evt);
+        }
+    }
+}
+
+function getData(newdata) {
+    if (newdata) {
+        data = newdata;
+        renderCal();
+    }
+}
+
+function updateFeed() {
+    console.log("Updating")
+    $.getJSON(URL, getData);
+}
+
+updateFeed();
+setInterval(updateFeed,5*60*1000); // every 5 minutes
+setInterval(renderCal,60*1000); // every 1 minute
 </script>
 </body>
 </html>
