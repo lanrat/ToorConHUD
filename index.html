@@ -2,24 +2,22 @@
 <head>
     <title>ToorCon Schedule</title>
     <link href="css/style.css" rel="stylesheet" />
+    <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
     <script src="https://code.jquery.com/jquery-2.2.4.min.js"   integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="   crossorigin="anonymous"></script>
 </head>
 <body>
-<img src="img/top.jpg" />
+<div class="main">
+<img class="background_art" src="/img/TCBG_2016.png" />
 
-<div class="center">
-    <div id="headline" class="label-maker">The American Hacker Camp</div>
-
-    <div id="clock" class="label-maker"></div>
+    <div id="clock" class="schedule-speaker"></div>
     
         <div id="schedule" class="schedule" >
             <span>
                 <div class="schedule-time">00:00</div>
-                <div class="schedule-box"><span class="schedule-speaker">Loading Schedule</span><br /><span class="schedule-title">...</span></div>
+                <div class="schedule-box"><span class="schedule-speaker">Loading Schedule</span><br /><span class="schedule-title"></span></div>
             </span>
         </div>
 
-    <img class="bottom-image" src="img/bottom.jpg" />
 </div>
 
 <script src="js/dateFormat.js"></script>
@@ -35,8 +33,10 @@ function ISODateString(d){
       + pad(d.getUTCSeconds())+'Z'
 }
 
-var d = new Date(2016, 5, 9); //now
-var timeMin = ISODateString(d);
+//var d = new Date(2016, 5, 9, 13, 20); //now
+var d = new Date(); //now
+//var timeMin = ISODateString(d);
+var timeMin = ISODateString(new Date(d.getFullYear(), d.getMonth(), d.getDate())); // midnight
 var timeMax = ISODateString(new Date(d.getFullYear(), d.getMonth(), d.getDate()+1)); // midnight
 
 </script>
@@ -52,13 +52,16 @@ if (!calendars[window.location.hash.substr(1)]) {
     window.location.hash = "#a";
 }
 
-var CALENDAR_ID = calendars[window.location.hash.substr(1)];
 
+// TODO this logich should be moved to a function to handle day changes
+var CALENDAR_ID = calendars[window.location.hash.substr(1)];
+//https://developers.google.com/google-apps/calendar/v3/reference/events/list#parameters
 var API_KEY = 'AIzaSyAwQwg4O6M_G1hqWxsRJMMAohIm57WmhTI';
 var URL = 'https://www.googleapis.com/calendar/v3/calendars/'+CALENDAR_ID+'/events?key='+API_KEY+'&timeMin='+timeMin+'&timeMax='+timeMax;
+//var URL = 'https://www.googleapis.com/calendar/v3/calendars/'+CALENDAR_ID+'/events?key='+API_KEY;
 
 function trimString(str) {
-    var len = 150;
+    var len = 100;
     if(!str) {
         return "";
     }
@@ -85,6 +88,9 @@ function renderCal() {
         schedule.removeChild(schedule.firstChild);
     }
 
+// TODO this needs to be dynalicly now...
+    //var now = new Date();
+    //var now = d;
     var now = new Date();
     var events = data.items;
     // sort
@@ -93,15 +99,23 @@ function renderCal() {
     });
 
     // add new events
-    for (var i=0; i<events.length; i++) {
+    for (var i=0; i<events.length && i < 12; i++) {
         var e = events[i];
-        var title = e.summary;
-        var description = trimString(e.description);
+        var parts = e.summary.split('-',2);
+        var title = parts[0];
+        var description = "";
+        if (parts.length > 1) {
+            description = parts[1];
+        }
+        console.log("title", title);
+        console.log("des", description);
+        //var title = e.summary;
+        //var description = trimString(e.description);
         var start = new Date(e.start.dateTime);
         var end = new Date(e.end.dateTime);
  
         //console.log(title, start, end, description);
-        if (now < end) {
+        //if (now < end) {
             var evt = template.cloneNode(true);
             var stime = evt.getElementsByClassName("schedule-time")[0];
             var sspeaker = evt.getElementsByClassName("schedule-speaker")[0];
@@ -109,12 +123,16 @@ function renderCal() {
             stime.innerText = start.format("HH:MM");
             sspeaker.innerHTML = title;
             stitle.innerHTML = description;
-            if (start < now) {
+            if (start < now && now < end) {
                 var p = stitle.parentElement;
                 p.className = p.className + " event-current";
             }
+            if (now > end) {
+                var p = stitle.parentElement;
+                p.className = p.className + " event-old";
+            }
             schedule.appendChild(evt);
-        }
+        //}
     }
 }
 

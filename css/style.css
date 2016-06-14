@@ -1,89 +1,88 @@
-html {
-    margin: 0 auto;
-    max-width: 1080px;
-}
 body {
     background: #000000;
     color: #FFFFFF;
     margin: 0;
 }
-img {
+
+.background_art {
     width: 1080px;
     padding: 0;
     margin: 0;
-    /*display: none;*/
-}
-/*@font-face {
-    font-family: labelmaker;
-    src: url(Impact_Label_Reversed.ttf);
-}*/
-.center {
-    width: 100%;
-    text-align: center;
-    display: inline-block;
-    position: relative;
-}
-.bottom-image {
     position: absolute;
-    bottom: 0px;
+    top: 0px;
     left: 0px;
     z-index: -1;
 }
-#headline {
-    font-size: 220%;
-    transform: rotate(1deg);
-    -webkit-transform: rotate(1deg);
-    margin-bottom: 1em;
-}
-#clock {
-    font-size: 1.2em;
-}
-.label-maker{
-    padding: .5em;
+
+.main {
+    margin-left: 420px;
+    margin-top: -420px;
+    transform: rotate(90deg);
+    -webkit-transform: rotate(90deg);
+
+    height: 1920px;
+    width: 1080px;
+    text-align: center;
     display: inline-block;
-    color: #fff;
-    font-family: monospace;
-    font-size: 1.2sem;
-    letter-spacing: .5em;
-    text-shadow:
-        /*top*/   0 -2px 1px #a00,
-        /*right*/ 2px 0 1px #a00,
-        /*botom*/ 0 2px 0 #600,
-        /*left*/ -2px 0 1px #a00;
-    background-image: linear-gradient(#D00, #B00);
+    position: relative;
+    padding: 0, 30px;
 }
+
+#clock {
+    font-size: 2em;
+    margin-top: 420px;
+    text-transform: uppercase;
+    text-shadow: 2px 2px #000000;
+    font-family: 'Roboto', sans-serif;
+}
+
 .schedule {
     width: 100%;
     display: absolute;
     font-size: 1.8em;
     display: block;
+    margin: 0 180px;
+    font-family: 'Roboto', sans-serif;
 }
+
 .schedule-time {
-    width: 20%;
     padding: 8px;
     text-align: center;
     float: left;
     font-family: monospace;
     padding: 10px;
+    /*margin-left: 60px;*/
 }
+
 .schedule-box {
-    margin: 10px;
-    margin-left: 20%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    /*margin-right: 0;*/
+    margin-left: 10%;
     opacity: 0.7;
-    width: 75%;
-    background-color: #ffffff;
+    width: 585px;
+    background-color: #97caa5;
+    border-radius: 15px;
     color: #000;
     padding: 8px;
     text-align: left;
 
 }
+
 .schedule-speaker {
     font-weight: bold;
 }
+
 .schedule-title {
     font-style: italic;
 }
+
 .event-current {
     border-style: solid;
-    border-color: yellow;
+    border-color: #012307;
+}
+
+.event-old {
+    background-color: #79927e;
+    color: #333333;
 }
