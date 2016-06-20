@@ -15,10 +15,10 @@ body {
 }
 
 .main {
-    margin-left: 420px;
+    /*margin-left: 420px;
     margin-top: -420px;
     transform: rotate(90deg);
-    -webkit-transform: rotate(90deg);
+    -webkit-transform: rotate(90deg);*/
 
     height: 1920px;
     width: 1080px;
