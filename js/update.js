@@ -9,7 +9,6 @@ window.applicationCache.addEventListener('updateready', function(e) {
     }
 }, false);
 function updateApp() {
-    console.log("Checking for app update");
     window.applicationCache.update();
 }
 // check for new page version

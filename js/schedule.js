@@ -175,7 +175,7 @@ function saveData(raw_data) {
 }
 
 function updateFeed() {
-    console.log("Checking for udapte");
+    //console.log("Checking for calendar update");
     var d = new Date();
     if (DEBUG) {
         d = testDate;
