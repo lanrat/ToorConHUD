@@ -1,3 +1,3 @@
 # ToorCon Schedule Displays
 
-http://lanrat.github.io/ToorConHUD
+https://lanrat.github.io/ToorConHUD
