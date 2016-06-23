@@ -5,7 +5,6 @@ body {
 }
 
 .background_art {
-    width: 1080px;
     padding: 0;
     margin: 0;
     position: absolute;
@@ -14,18 +13,19 @@ body {
     z-index: -1;
 }
 
-.main {
-    /*margin-left: 420px;
+.rotate {
+    margin-left: 420px;
     margin-top: -420px;
     transform: rotate(90deg);
-    -webkit-transform: rotate(90deg);*/
+    -webkit-transform: rotate(90deg);
+}
 
-    height: 1920px;
+.main {
     width: 1080px;
+    height: 1920px;
     text-align: center;
     display: inline-block;
     position: relative;
-    padding: 0, 30px;
 }
 
 .clock {
@@ -39,12 +39,13 @@ body {
 
 .schedule {
     width: 100%;
-    display: absolute;
+    /*display: absolute;*/
     font-size: 1.8em;
     display: block;
     margin: 0 180px;
     padding: 0;
     font-family: 'Roboto', sans-serif;
+    list-style-type: none;
 }
 
 .event {
@@ -61,11 +62,10 @@ body {
 .event-box {
     margin-top: 10px;
     margin-bottom: 10px;
-    /*margin-right: 0;*/
     margin-left: 10%;
-    opacity: 0.7;
     width: 585px;
-    background-color: #97caa5;
+    /*background-color: #97caa5;*/
+    background: rgba(151, 202, 165, .7);
     border-radius: 15px;
     color: #000;
     padding: 8px;
@@ -86,6 +86,7 @@ body {
 }
 
 .event-old {
-    background-color: #79927e;
+    /*background-color: #79927e;*/
+    background: rgba(121, 146, 126, .7);
     color: #333333;
 }
