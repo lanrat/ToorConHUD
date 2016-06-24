@@ -100,10 +100,6 @@ function renderCal() {
     var day_end = new Date(now.getFullYear(), now.getMonth(), now.getDate()+1); // midnight
 
     var events = JSON.parse(dataStore['events']);
-    // sort
-    events.sort(function(a, b) {
-        return new Date(a.start.dateTime || a.start.date).getTime() - new Date(b.start.dateTime || b.start.date).getTime();
-    });
 
     var displayed_events = 0;
     // add new events
@@ -167,8 +163,13 @@ function saveData(raw_data) {
         // only update if changed
         if (dataStore['updated'] != data.updated) {
             console.log("Calendar Updated");
-            dataStore['updated'] = data.updated;
+            // sort
+            data.items.sort(function(a, b) {
+                return new Date(a.start.dateTime || a.start.date).getTime() - new Date(b.start.dateTime || b.start.date).getTime();
+            });
+            // save
             dataStore['events'] = JSON.stringify(data.items);
+            dataStore['updated'] = data.updated;
             renderCal();
         }
     }
