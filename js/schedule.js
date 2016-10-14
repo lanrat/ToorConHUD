@@ -93,7 +93,10 @@ function renderCal() {
     }
 
     // Room
-    var room = window.location.hash.substr(1).toLowerCase();
+    var room = window.location.search.substr(1).replace('/','');
+    if (room == "") {
+        room = window.location.hash.substr(1).toLowerCase();
+    }
 
     // today
     var day_start = new Date(now.getFullYear(), now.getMonth(), now.getDate()); // midnight
