@@ -138,7 +138,7 @@ function renderCal() {
         var title = event_title;
         var description = "";
         if (event_description) {
-            description = event_description;
+            description = event_description.split('\n')[0]; // first line
         }
 
         // get parts of event element
