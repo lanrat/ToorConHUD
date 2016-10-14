@@ -2,14 +2,11 @@
 // Settings and variables
 //
 
-var calendars = {
-    a: 'toorcon.org_5gc3slk5srkld07gkd2ank587s%40group.calendar.google.com',
-    b: 'carlos%40toorcon.org',
-};
+var calendar = 'ukbq57knmgtm7tubcclr43lrjo@group.calendar.google.com';
 
 var API_KEY = 'AIzaSyAwQwg4O6M_G1hqWxsRJMMAohIm57WmhTI';
 var DEBUG = true;
-var testDate = new Date(2016, 5, 9, 13, 20);
+var testDate = new Date(2016, 10 -1, 15, 13, 20); // month is offset 0
 var render_interval = 60*1000; // every 1 minute
 var update_interval = 5*60*1000; // every 5 minutes
 var max_google_results = 250;
@@ -95,6 +92,9 @@ function renderCal() {
         now = testDate;
     }
 
+    // Room
+    var room = window.location.hash.substr(1).toLowerCase();
+
     // today
     var day_start = new Date(now.getFullYear(), now.getMonth(), now.getDate()); // midnight
     var day_end = new Date(now.getFullYear(), now.getMonth(), now.getDate()+1); // midnight
@@ -111,6 +111,9 @@ function renderCal() {
         var event_title = e.summary;
         var event_description = e.description;
         var event_location = e.location;
+        if (event_location) {
+            event_location = event_location.toLowerCase();
+        }
 
         // checks to test if event should be displayed
         // do we display past events?
@@ -121,15 +124,18 @@ function renderCal() {
         if (single_day && (event_end < day_start || event_start > day_end)) {
             continue;
         }
+        // check room
+        if (!((!event_location) || event_location == "" || event_location == room || room == "")) {
+            continue;
+        }
 
         // TODO insert header for events on differnet days
 
         // prossessing
-        var parts = event_title.split('-',2);
-        var title = parts[0];
+        var title = event_title;
         var description = "";
-        if (parts.length > 1) {
-            description = parts[1];
+        if (event_description) {
+            description = event_description;
         }
 
         // get parts of event element
@@ -182,16 +188,13 @@ function updateFeed() {
         d = testDate;
     }
     var timeMin = ISODateString(new Date(d.getFullYear(), d.getMonth(), d.getDate())); // midnight
-    var calID = calendars[window.location.hash.substr(1)];
+    //var calID = calendars[window.location.hash.substr(1)];
+    var calID = calendar;
     // https://developers.google.com/google-apps/calendar/v3/reference/events/list#parameters
     var url = 'https://www.googleapis.com/calendar/v3/calendars/'+calID+'/events?key='+API_KEY+'&timeMin='+timeMin+'&mexResults='+max_google_results;
     AJAXget(url, saveData);
 }
 
-// default to first calendar
-if (!calendars[window.location.hash.substr(1)]) {
-    window.location.hash = Object.keys(calendars)[0];
-}
 
 // localstorage test
 if (supports_html5_storage() == false) {
