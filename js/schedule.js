@@ -5,7 +5,7 @@
 var calendar = 'ukbq57knmgtm7tubcclr43lrjo@group.calendar.google.com';
 
 var API_KEY = 'AIzaSyAwQwg4O6M_G1hqWxsRJMMAohIm57WmhTI';
-var DEBUG = true;
+var DEBUG = false;
 var testDate = new Date(2016, 10 -1, 15, 13, 20); // month is offset 0
 var render_interval = 60*1000; // every 1 minute
 var update_interval = 5*60*1000; // every 5 minutes
@@ -26,6 +26,29 @@ function ISODateString(d){
         + pad(d.getUTCHours())+':'
         + pad(d.getUTCMinutes())+':'
         + pad(d.getUTCSeconds())+'Z'
+}
+
+function getQueryVariable(variable){
+   var query = window.location.search.substring(1);
+   var vars = query.split("&");
+   for (var i=0;i<vars.length;i++) {
+       var pair = vars[i].split("=");
+        if(pair[0] == variable){return pair[1];}
+   }
+   return "";
+}
+
+// check for rotate
+var r = getQueryVariable("r");
+if (r !=- "") {
+    var m = document.getElementById("main");
+    m.className += m.className ? ' rotate' : 'rotate';
+}
+
+// check for test
+var t = getQueryVariable("t");
+if (t != "") {
+    DEBUG = true;
 }
 
 // unused
@@ -93,7 +116,8 @@ function renderCal() {
     }
 
     // Room
-    var room = window.location.search.substr(1).replace('/','');
+    //var room = window.location.search.substr(1).replace('/','');
+    var room = getQueryVariable("s").toLowerCase();
     if (room == "") {
         room = window.location.hash.substr(1).toLowerCase();
     }
