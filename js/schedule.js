@@ -101,6 +101,18 @@ var dataStore;
 var schedule = document.getElementById("schedule");
 var template = schedule.children[0];
 
+function getRoom(){
+
+    // Room
+    //var room = window.location.search.substr(1).replace('/','');
+    var room = getQueryVariable("s").toLowerCase();
+    if (room == "") {
+        room = window.location.hash.substr(1).toLowerCase();
+    }
+
+    return room;
+}
+
 function renderCal() {
     // remove if first load
     template.remove();
@@ -115,12 +127,7 @@ function renderCal() {
         now = testDate;
     }
 
-    // Room
-    //var room = window.location.search.substr(1).replace('/','');
-    var room = getQueryVariable("s").toLowerCase();
-    if (room == "") {
-        room = window.location.hash.substr(1).toLowerCase();
-    }
+    var room = getRoom();
 
     // today
     var day_start = new Date(now.getFullYear(), now.getMonth(), now.getDate()); // midnight
@@ -190,6 +197,34 @@ function renderCal() {
     }
 }
 
+var videoTrackURL = "ws://svr-1.toorcon.local"
+var portTrack1 = "8081";
+var portTrack2 = "8082";
+
+function renderVideo(){
+
+    var enabled = getQueryVariable("v").toLowerCase();
+    if(enabled != "1"){
+        document.getElementById("video").style.display = "none";
+        return false;
+    }
+
+    var room = getRoom();
+    var port = portTrack1;
+
+    if(room=="track2"){
+        port = portTrack2;   
+    }
+
+    var canvas = document.getElementById('videoCanvas');
+    var client = new WebSocket( videoTrackURL + ':' + port + '/' );
+    // var canvas = document.createElement('canvas');
+    // canvas.setAttribute('width', '640');
+    // canvas.setAttribute('height', '480');
+    // document.body.appendChild(canvas);
+    var player = new jsmpeg(client, {canvas:canvas});
+}
+
 function saveData(raw_data) {
     if (raw_data) {
         var data = JSON.parse(raw_data);
@@ -239,3 +274,7 @@ if (dataStore['events']) {
 updateFeed();
 setInterval(updateFeed, update_interval);
 setInterval(renderCal, render_interval);
+
+document.addEventListener("DOMContentLoaded", function(event) { 
+  renderVideo();
+});

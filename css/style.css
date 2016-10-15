@@ -94,3 +94,8 @@ body {
     background: rgba(37, 95, 109, .7);
     color: #989898;
 }
+
+#video{
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
