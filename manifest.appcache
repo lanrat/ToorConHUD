@@ -1,5 +1,5 @@
 CACHE MANIFEST
-# v6.5
+# v6.6
 
 CACHE:
 css/style.css
@@ -8,6 +8,7 @@ js/clock.js
 js/dateFormat.js
 js/schedule.js
 js/update.js
+js/jsmpg.js
 https://fonts.googleapis.com/css?family=Roboto
 
 NETWORK:
