@@ -1,0 +1,24 @@
+foscam1:
+  image: foscam
+  container_name: foscam1
+  restart: always
+  environment:
+    - USERNAME=example333?AOSñ
+    - PASSWORD=example333?AOSñ
+    - CAM_ADDRESS=172.31.0.11:88
+    - WIDTH=320
+    - HEIGHT=180
+  ports:
+    - '8081:8084'
+foscam2:
+  image: foscam
+  restart: always
+  container_name: foscam2
+  environment:
+    - USERNAME=example333?AOSñ
+    - PASSWORD=example333?AOSñ
+    - CAM_ADDRESS=172.31.0.10:88
+    - WIDTH=320
+    - HEIGHT=180
+  ports:
+    - '8082:8084'
