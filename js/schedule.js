@@ -200,6 +200,7 @@ function renderCal() {
 var videoTrackURL = "ws://svr-1.toorcon.local"
 var portTrack1 = "8081";
 var portTrack2 = "8082";
+var player;
 
 function renderVideo(){
 
@@ -222,7 +223,19 @@ function renderVideo(){
     // canvas.setAttribute('width', '640');
     // canvas.setAttribute('height', '480');
     // document.body.appendChild(canvas);
-    var player = new jsmpeg(client, {canvas:canvas});
+    player = new jsmpeg(client, {canvas:canvas});
+}
+
+var lastFrame = 0;
+function videoCheck() {
+    if (!player) {
+        return;
+    }
+    if (lastFrame == player.currentFrame) {
+        player.stop();
+        renderVideo();
+    }
+    lastFrame = player.currentFrame;
 }
 
 function saveData(raw_data) {
@@ -274,6 +287,7 @@ if (dataStore['events']) {
 updateFeed();
 setInterval(updateFeed, update_interval);
 setInterval(renderCal, render_interval);
+setInterval(videoCheck, 5*1000 ); // every 5s
 
 document.addEventListener("DOMContentLoaded", function(event) { 
   renderVideo();
