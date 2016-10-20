@@ -8,4 +8,4 @@ python -m SimpleHTTPServer
 ```
 
 ### Transcoder
-Branch: [transcoder](/lanrat/ToorConHUD/tree/transcoder)
+Branch: [transcoder](https://github.com/lanrat/ToorConHUD/tree/transcoder)
