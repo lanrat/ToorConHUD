@@ -1,6 +1,6 @@
 # ToorCon Schedule Displays
 
-https://lanrat.github.io/ToorConHUD
+https://toorcon.github.io/schedule/
 
 Test with:
 ```
