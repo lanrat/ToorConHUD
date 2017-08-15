@@ -2,11 +2,11 @@
 // Settings and variables
 //
 
-var calendar = 'ukbq57knmgtm7tubcclr43lrjo@group.calendar.google.com';
+var calendar = 'toorcon.org_fingd5s7evv78jsjdprf1ctvr4@group.calendar.google.com';
 
 var API_KEY = 'AIzaSyAwQwg4O6M_G1hqWxsRJMMAohIm57WmhTI';
 var DEBUG = false;
-var testDate = new Date(2016, 10 -1, 15, 13, 20); // month is offset 0
+var testDate = new Date(2017, 9 -1, 2, 13, 20); // month is offset 0
 var render_interval = 60*1000; // every 1 minute
 var update_interval = 5*60*1000; // every 5 minutes
 var max_google_results = 250;
@@ -49,6 +49,7 @@ if (r !=- "") {
 var t = getQueryVariable("t");
 if (t != "") {
     DEBUG = true;
+    console.log("Debug mode activated to:", testDate);
 }
 
 // unused
@@ -109,6 +110,10 @@ function getRoom(){
     if (room == "") {
         room = window.location.hash.substr(1).toLowerCase();
     }
+
+    room = room.replace('/','');
+
+    console.log("Room:",room)
 
     return room;
 }
