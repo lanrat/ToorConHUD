@@ -56,7 +56,7 @@ function getNow() {
         effective_single_day = false;
     }
     // return last known good date
-    return dataStore['last_known_date'];
+    return new Date(dataStore['last_known_date']);
 }
 
 
