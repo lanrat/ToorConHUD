@@ -187,7 +187,21 @@ function renderCal() {
             continue;
         }
 
-        // TODO insert header for events on differnet days
+        // insert header for events on differnet days
+        if ((!effective_single_day) && (i > 1)) {
+            var prev_start = new Date(events[i-1].start.dateTime)
+            var new_start = new Date(events[i].start.dateTime)
+            if (prev_start.getDate() != new_start.getDate()) {
+                // show date header
+                var event_element = template.cloneNode(true);
+                var event_element_time = event_element.getElementsByClassName("event-time")[0];
+                event_element_time.innerHTML = new_start.format("dddd dd");
+                event_element_time.className = "day-seperator";
+                var event_element_box = event_element.getElementsByClassName("event-box")[0];
+                event_element_box.style.display = "none";
+                schedule.appendChild(event_element);
+            }
+        }
 
         // prossessing
         var title = event_title;
