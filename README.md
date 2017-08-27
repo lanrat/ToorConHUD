@@ -39,7 +39,13 @@ https://toorcon.github.io/schedule/?t=1
 Add the following to `.git/hooks/pre-commit` to automatically update the manifest when pushing.
 
 ```
-TODO
+#!/bin/sh
+
+epoc=$(date +'%s')
+
+echo "Updating manifest.appcache version: $epoc"
+sed -i "s/# v.*$/# v$epoc/g" manifest.appcache 
+git add manifest.appcache
 ```
 
 ### Transcoder
