@@ -43,13 +43,17 @@ function getQueryVariable(variable){
    return "";
 }
 
-// returns a new date object with the current timestamp or last known good time if NTP has failed
-function getNow() {
+function NTPUp() {
     var ancient_history = new Date('01/01/2015');
     var system_now = new Date();
-    if (system_now > ancient_history || !dataStore['last_known_date']) {
+    return (system_now > ancient_history || !dataStore['last_known_date']);
+}
+
+// returns a new date object with the current timestamp or last known good time if NTP has failed
+function getNow() {
+    if (NTPUp()) {
         // looks like NTP is working, save the good date, or we have no history...
-        dataStore['last_known_date'] = system_now;
+        dataStore['last_known_date'] = new Date();
         effective_single_day = single_day;
     } else {
         // else put calendar into show all mode
@@ -146,6 +150,7 @@ function renderCal() {
         schedule.removeChild(schedule.firstChild);
     }
 
+    var ntp = NTPUp();
     var now = getNow();
     if (DEBUG) {
         now = testDate;
@@ -226,14 +231,16 @@ function renderCal() {
         if ((!room || room == "") && (event_location && event_location != "")) {
             event_element_details2.innerHTML = event_location;
         }
-        // add CSS for old or current events
-        if (now > event_end) {
-            event_element_box.className = event_element_box.className + " event-old";
+        if (ntp) {
+            // add CSS for old or current events
+            if (now > event_end) {
+                event_element_box.className = event_element_box.className + " event-old";
+            }
+            if (event_start < now && now < event_end) {
+                event_element_box.className = event_element_box.className + " event-current";
+            }
         }
-        if (event_start < now && now < event_end) {
-            event_element_box.className = event_element_box.className + " event-current";
-        }
-        // display event
+            // display event
         schedule.appendChild(event_element);
         displayed_events++;
     }
@@ -317,7 +324,10 @@ function update_clock() {
     var clock = document.getElementById("clock");
     var today = getNow();
     var dateString = today.format("dddd mmmm dd, HH:MM");
-    clock.innerText=dateString;
+    if (!NTPUp()) {
+        dateString = today.format("dddd mmmm dd");
+    }
+    clock.innerText = dateString;
 }
 
 // localstorage test
