@@ -181,14 +181,19 @@ function renderCal() {
         var event_element = template.cloneNode(true);
         var event_element_time = event_element.getElementsByClassName("event-time")[0];
         var event_element_title = event_element.getElementsByClassName("event-title")[0];
-        var event_element_details = event_element.getElementsByClassName("event-details")[0];
+        var event_element_details1 = event_element.getElementsByClassName("event-details1")[0];
+        var event_element_details2 = event_element.getElementsByClassName("event-details2")[0];
         var event_element_box = event_element.getElementsByClassName("event-box")[0];
 
         // set event element text
         event_element_time.innerText = event_start.format("HH:MM");
         event_element_title.innerHTML = title;
-        event_element_details.innerHTML = description;
-
+        event_element_details1.innerHTML = description;
+        // if no room is given, and the event has one, show it
+        if ((!room || room == "") && (event_location && event_location != "")) {
+            event_element_details2.innerHTML = event_location;
+            console.log("Showing all locations", event_location);
+        }
         // add CSS for old or current events
         if (now > event_end) {
             event_element_box.className = event_element_box.className + " event-old";
