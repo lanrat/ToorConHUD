@@ -298,6 +298,13 @@ function updateFeed() {
     AJAXget(url, saveData);
 }
 
+/* Clock */
+function update_clock() {
+    var clock = document.getElementById("clock");
+    var today = getNow();
+    var dateString = today.format("dddd mmmm dd, HH:MM");
+    clock.innerText=dateString;
+}
 
 // localstorage test
 if (supports_html5_storage() == false) {
@@ -312,10 +319,12 @@ if (dataStore['events']) {
     renderCal();
 }
 
+update_clock();
 updateFeed();
 setInterval(updateFeed, update_interval);
 setInterval(renderCal, render_interval);
 setInterval(videoCheck, 5*1000 ); // every 5s
+setInterval(update_clock, 5000); // every 5 secconds
 
 document.addEventListener("DOMContentLoaded", function(event) { 
   renderVideo();
