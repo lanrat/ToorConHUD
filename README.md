@@ -34,6 +34,13 @@ Testing
 https://toorcon.github.io/schedule/?t=1
 
 
+## pre-commit hooks
+
+Add the following to `.git/hooks/pre-commit` to automatically update the manifest when pushing.
+
+```
+TODO
+```
 
 ### Transcoder
 Branch: [transcoder](https://github.com/toorcon/schedule/tree/transcoder)
