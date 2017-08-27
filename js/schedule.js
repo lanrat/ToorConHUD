@@ -6,7 +6,7 @@ var calendar = 'toorcon.org_fingd5s7evv78jsjdprf1ctvr4@group.calendar.google.com
 
 var API_KEY = 'AIzaSyAwQwg4O6M_G1hqWxsRJMMAohIm57WmhTI';
 var DEBUG = false;
-var testDate = new Date(2017, 9 -1, 2, 13, 20); // month is offset 0
+var testDate = new Date('2017/9/2 13:20');
 var render_interval = 60*1000; // every 1 minute
 var update_interval = 5*60*1000; // every 5 minutes
 var max_google_results = 250;
@@ -14,9 +14,13 @@ var display_old = true;
 var single_day = true;
 var max_display_events = 40;
 
+
 //
 // Code
 //
+
+// object to hold all offline data
+var dataStore;
 
 function ISODateString(d){
     function pad(n){return n<10 ? '0'+n : n}
@@ -37,6 +41,20 @@ function getQueryVariable(variable){
    }
    return "";
 }
+
+// returns a new date object with the current timestamp or last known good time if NTP has failed
+function getNow() {
+    var ancient_history = new Date('01/01/2015');
+    var system_now = new Date();
+    if (system_now > ancient_history || !dataStore['last_known_date']) {
+        // looks like NTP is working, save the good date, or we have no history...
+        dataStore['last_known_date'] = system_now;
+    }
+    // TODO else put calendar into show all mode...
+    // return last known good date
+    return dataStore['last_known_date'];
+}
+
 
 // check for rotate
 var r = getQueryVariable("r");
@@ -95,9 +113,6 @@ function AJAXget(url, handler) {
     request.send();
 }
 
-
-var dataStore;
-
 // get template
 var schedule = document.getElementById("schedule");
 var template = schedule.children[0];
@@ -127,7 +142,7 @@ function renderCal() {
         schedule.removeChild(schedule.firstChild);
     }
 
-    var now = new Date();
+    var now = getNow();
     if (DEBUG) {
         now = testDate;
     }
@@ -192,7 +207,6 @@ function renderCal() {
         // if no room is given, and the event has one, show it
         if ((!room || room == "") && (event_location && event_location != "")) {
             event_element_details2.innerHTML = event_location;
-            console.log("Showing all locations", event_location);
         }
         // add CSS for old or current events
         if (now > event_end) {
