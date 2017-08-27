@@ -21,6 +21,7 @@ var max_display_events = 40;
 
 // object to hold all offline data
 var dataStore;
+var effective_single_day = single_day;
 
 function ISODateString(d){
     function pad(n){return n<10 ? '0'+n : n}
@@ -49,8 +50,11 @@ function getNow() {
     if (system_now > ancient_history || !dataStore['last_known_date']) {
         // looks like NTP is working, save the good date, or we have no history...
         dataStore['last_known_date'] = system_now;
+        effective_single_day = single_day;
+    } else {
+        // else put calendar into show all mode
+        effective_single_day = false;
     }
-    // TODO else put calendar into show all mode...
     // return last known good date
     return dataStore['last_known_date'];
 }
@@ -175,7 +179,7 @@ function renderCal() {
             continue;
         }
         // do we show events before or after the current day today?
-        if (single_day && (event_end < day_start || event_start > day_end)) {
+        if (effective_single_day && (event_end < day_start || event_start > day_end)) {
             continue;
         }
         // check room
