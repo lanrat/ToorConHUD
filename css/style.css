@@ -37,7 +37,7 @@ body {
 }
 
 .main-box {
-    background: rgba(23, 53, 76, .7);
+    background: rgba(228, 228, 228, .7);
     border-radius: 15px;
     margin: 0 180px;
     margin-top: 300px;
@@ -70,11 +70,13 @@ body {
     margin-bottom: 10px;
     margin-left: 13%;
     width: 585px;
-    background: rgba(110, 192, 212, .7);
+    /*background: rgba(105, 105, 105, .7);*/
+    background: rgba(0, 0, 0, .7);
     border-radius: 15px;
     color: #000;
     padding: 8px;
     text-align: left;
+    color: #989898
 }
 
 .event-title {
@@ -97,8 +99,9 @@ body {
 }
 
 .event-old {
-    background: rgba(37, 95, 109, .7);
-    color: #989898;
+    /*background: rgba(37, 95, 109, .7);*/
+    background: rgba(105, 105, 105, .7);
+    color: #484848;
 }
 
 .day-seperator {
