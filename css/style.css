@@ -32,14 +32,15 @@ body {
     font-weight: bold;
     font-size: 2em;
     text-transform: uppercase;
-    text-shadow: 3px 3px #000000;
+    /*text-shadow: 3px 3px #000000;*/
     font-family: 'Roboto', sans-serif;
+    color: #000000;
 }
 
 .main-box {
-    background: rgba(228, 228, 228, .7);
+    background: rgba(208, 208, 208, .7);
     border-radius: 15px;
-    margin: 0 180px;
+    margin: 0 80px;
     margin-top: 300px;
     padding: 1em 0;
 }
@@ -62,21 +63,24 @@ body {
     float: left;
     font-family: monospace;
     padding: 10px;
-     text-shadow: 2px 2px #000000;
+    /*text-shadow: 2px 2px #000000;*/
+    color: #000000;
 }
 
 .event-box {
     margin-top: 10px;
     margin-bottom: 10px;
     margin-left: 13%;
-    width: 585px;
+    /*width: 585px;*/
     /*background: rgba(105, 105, 105, .7);*/
-    background: rgba(0, 0, 0, .7);
+    /*background: rgba(0, 0, 0, .7);*/
+    background: rgba(105, 105, 105, .7);
     border-radius: 15px;
-    color: #000;
+    color: #000000;
     padding: 8px;
     text-align: left;
-    color: #989898
+    /*color: #989898;*/
+    margin-right: 30px;
 }
 
 .event-title {
@@ -101,7 +105,7 @@ body {
 .event-old {
     /*background: rgba(37, 95, 109, .7);*/
     background: rgba(105, 105, 105, .7);
-    color: #484848;
+    color: #d8d8d8;
 }
 
 .day-seperator {
