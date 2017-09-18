@@ -184,7 +184,7 @@ function renderCal() {
             continue;
         }
         // do we show events before or after the current day today?
-        if (effective_single_day && (event_end < day_start || event_start > day_end)) {
+        if (effective_single_day && (event_end <= day_start || event_start > day_end)) {
             continue;
         }
         // check room
