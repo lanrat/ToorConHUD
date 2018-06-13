@@ -1,6 +1,6 @@
 # ToorCon Schedule Displays
 
-https://toorcon.github.io/schedule/
+https://hud.toorcon.net/
 
 Test with:
 ```
@@ -13,25 +13,25 @@ python -m SimpleHTTPServer
 
 Track Selection
 
-https://toorcon.github.io/schedule/?s=track1
+https://hud.toorcon.net/?s=track1
 
 
 
 Page Rotation
 
-https://toorcon.github.io/schedule/?r=1
+https://hud.toorcon.net/?r=1
 
 
 
 Video Stream
 
-https://toorcon.github.io/schedule/?v=1
+https://hud.toorcon.net/?v=1
 
 
 
 Testing
 
-https://toorcon.github.io/schedule/?t=1
+https://hud.toorcon.net/?t=1
 
 
 ## pre-commit hooks
