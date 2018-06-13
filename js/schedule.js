@@ -6,7 +6,7 @@ var calendar = 'toorcon.org_fingd5s7evv78jsjdprf1ctvr4@group.calendar.google.com
 
 var API_KEY = 'AIzaSyAwQwg4O6M_G1hqWxsRJMMAohIm57WmhTI';
 var DEBUG = false;
-var testDate = new Date('2017/9/2 13:20');
+var testDate = new Date('2017/9/3 13:20');
 var render_interval = 60*1000; // every 1 minute
 var update_interval = 5*60*1000; // every 5 minutes
 var max_google_results = 250;
@@ -163,14 +163,16 @@ function renderCal() {
     var day_end = new Date(now.getFullYear(), now.getMonth(), now.getDate()+1); // midnight
 
     var events = JSON.parse(dataStore['events']);
+    console.log("number of events:", events.length);
 
     var displayed_events = 0;
     // add new events
     for (var i = 0; i < events.length && displayed_events < max_display_events; i++) {
         var e = events[i];
-        // event data from google
-        var event_start = new Date(e.start.dateTime);
-        var event_end = new Date(e.end.dateTime);
+        //console.log("event", e);
+        // event data from Google
+        var event_start = new Date(e.start.raw);
+        var event_end = new Date(e.end.raw);
         var event_title = e.summary;
         var event_description = e.description;
         var event_location = e.location;
@@ -192,10 +194,10 @@ function renderCal() {
             continue;
         }
 
-        // insert header for events on differnet days
+        // insert header for events on different days
         if ((!effective_single_day) && (i > 1)) {
-            var prev_start = new Date(events[i-1].start.dateTime)
-            var new_start = new Date(events[i].start.dateTime)
+            var prev_start = new Date(events[i-1].start.raw)
+            var new_start = new Date(events[i].start.raw)
             if (prev_start.getDate() != new_start.getDate()) {
                 // show date header
                 var event_element = template.cloneNode(true);
@@ -291,11 +293,16 @@ function saveData(raw_data) {
     if (raw_data) {
         var data = JSON.parse(raw_data);
         // only update if changed
-        if (dataStore['updated'] != data.updated) {
+        if (dataStore['updated'] != data.updated || dataStore['events'].length != data.items.length) {
             console.log("Calendar Updated");
+            // give all events the same date structure
+            for (var i =0; i < data.items.length; i++) {
+                data.items[i].start.raw = data.items[i].start.dateTime || data.items[i].start.date;
+                data.items[i].end.raw = data.items[i].end.dateTime || data.items[i].end.date;
+            }
             // sort
             data.items.sort(function(a, b) {
-                return new Date(a.start.dateTime || a.start.date).getTime() - new Date(b.start.dateTime || b.start.date).getTime();
+                return new Date(a.start.raw).getTime() - new Date(b.start.raw).getTime();
             });
             // save
             dataStore['events'] = JSON.stringify(data.items);
