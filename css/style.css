@@ -39,10 +39,11 @@ body {
 
 .main-box {
     background: rgba(208, 208, 208, .7);
-    border-radius: 15px;
+    border-radius: 30px;
     margin: 0 80px;
     margin-top: 300px;
     padding: 1em 0;
+    height: 1500px; /*hardcode height, remove this to make dynamic*/
 }
 
 .schedule {
