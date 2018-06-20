@@ -1,13 +1,13 @@
 CACHE MANIFEST
-# v1528868619
+# v1529522423
 
 CACHE:
 css/style.css
 img/TCBG.png
-js/dateFormat.js
-js/schedule.js
+#js/schedule.js
 js/update.js
 js/jsmpg.js
+js/moment.min.js
 https://fonts.googleapis.com/css?family=Roboto
 
 NETWORK:
