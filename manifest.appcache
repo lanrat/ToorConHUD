@@ -1,10 +1,10 @@
 CACHE MANIFEST
-# v1529522423
+# v1529522453
 
 CACHE:
 css/style.css
 img/TCBG.png
-#js/schedule.js
+js/schedule.js
 js/update.js
 js/jsmpg.js
 js/moment.min.js
