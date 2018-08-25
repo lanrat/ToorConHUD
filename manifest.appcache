@@ -1,10 +1,11 @@
 CACHE MANIFEST
-# v1529528144
+# 133737enoss
 
 CACHE:
 css/style.css
 img/TCBG.png
 js/schedule.js
+js/settings.js
 js/update.js
 js/jsmpg.js
 js/moment.min.js

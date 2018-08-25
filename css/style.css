@@ -127,4 +127,5 @@ body {
 #video{
     margin-top: 15px;
     margin-bottom: 15px;
+    display: none;
 }
