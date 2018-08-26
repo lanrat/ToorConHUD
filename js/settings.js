@@ -20,10 +20,14 @@ var id = getQueryVariable("id");
 switch(id) {
     case "1":
         settings.room = "track1";
-        settings.rotate = true;
+        settings.rotate = false;
         break;
     case "2":
         settings.room = "track2";
+        settings.rotate = false;
+        break;
+    case "f1":
+        settings.room = "track1";
         settings.rotate = true;
         break;
     default:
