@@ -30,6 +30,10 @@ switch(id) {
         settings.room = "track1";
         settings.rotate = true;
         break;
+    case "f2":
+        settings.room = "track2";
+        settings.rotate = true;
+        break;
     default:
         // no id set...
 }
