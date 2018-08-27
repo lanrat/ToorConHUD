@@ -16,8 +16,9 @@ body {
 .rotate {
     transform: rotate(-90deg);
     -webkit-transform: rotate(-90deg);
-    left: 420px;
-    top: -420px;
+    transform-origin: top left;
+    -webkit-transform-origin: top left;
+    top: 1080px;
     /*overflow: hidden;*/
 }
 
