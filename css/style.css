@@ -14,10 +14,11 @@ body {
 }
 
 .rotate {
-    margin-left: 420px;
-    margin-top: -420px;
     transform: rotate(-90deg);
     -webkit-transform: rotate(-90deg);
+    left: 420px;
+    top: -420px;
+    /*overflow: hidden;*/
 }
 
 .main {
@@ -25,7 +26,7 @@ body {
     height: 1920px;
     text-align: center;
     display: inline-block;
-    position: relative;
+    position: absolute;
 }
 
 .clock {
