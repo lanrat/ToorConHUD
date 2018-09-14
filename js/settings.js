@@ -7,7 +7,7 @@ var settings = {
     test: false,
     testDate: new Date('2018/09/15 13:20'),
     render_interval: 30*1000, // every 30s
-    update_interval: 5*60*1000, // every 5 minutes
+    update_interval: 60*1000, // every 1 minutes
     display_old: true,
     single_day: true,
     max_display_events: 40,

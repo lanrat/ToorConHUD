@@ -12,4 +12,4 @@ function updateApp() {
     window.applicationCache.update();
 }
 // check for new page version
-setInterval(updateApp,10*60*1000); // 10 min
+setInterval(updateApp,60*1000); // 1 min
