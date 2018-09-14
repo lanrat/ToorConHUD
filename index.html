@@ -8,7 +8,8 @@
 </head>
 <body>
 <div class="main" id="main">
-    <img class="background_art" src="img/TCBG.png" alt=""/>
+        <img class="background_art" id="wallpaper_bottom" alt=""/>
+        <img class="background_art" id="wallpaper_top" alt=""/>
 
     <div id="main-box" class="main-box">
 
@@ -18,24 +19,33 @@
             <canvas id="videoCanvas"></canvas>
         </div>
 
+        <div id="announcement" class="announcement">
+            <div class="event-box">
+            <p id="announcement-text"></p>
+            </div>
+        </div>
+
 
         <ul id="schedule" class="schedule">
             <li class="event">
                 <div class="event-time">00:00</div>
                 <div class="event-box">
                     <span class="event-title">Loading Schedule</span>
-                    <span class="event-details2"></span>
+                    <span class="event-room"></span>
                     <br />
                     <span class="event-details1"></span>
+                    <span class="event-details2"></span>
                 </div>
             </li>
         </ul>
+
     </div>
     <span class="schedule-link">https://hud.toorcon.net/</span>
 </div>
 <script src="js/jsmpg.js"></script>
 <script src="js/moment.min.js"></script>
 <script src="js/schedule.js"></script>
+<script src="js/layout.js"></script>
 <script src="js/settings.js"></script>
 <script src="js/update.js"></script>
 </body>

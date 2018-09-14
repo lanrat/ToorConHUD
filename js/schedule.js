@@ -122,10 +122,20 @@ function renderCal() {
         schedule.removeChild(schedule.firstChild);
     }
 
+    // show announcement if any
+    if (settings.announcement) {
+        document.getElementById("announcement").style.display = "block"; // unhide
+        var announcement_text = document.getElementById("announcement-text");
+        announcement_text.innerText = settings.announcement;
+        console.log("settings announcement", announcement_text.innerText);
+    } else {
+        document.getElementById("announcement").style.display = "none"; // hide
+    }
+
     var ntp = NTPUp();
     var now = getNow();
     if (settings.test) {
-        now = settings.testDate;
+        now = settings.test;
     }
 
     // today
@@ -193,6 +203,7 @@ function renderCal() {
         var event_element_title = event_element.getElementsByClassName("event-title")[0];
         var event_element_details1 = event_element.getElementsByClassName("event-details1")[0];
         var event_element_details2 = event_element.getElementsByClassName("event-details2")[0];
+        var event_element_room = event_element.getElementsByClassName("event-room")[0];
         var event_element_box = event_element.getElementsByClassName("event-box")[0];
 
         // set event element text
@@ -201,7 +212,11 @@ function renderCal() {
         event_element_details1.innerText = description;
         // if no room is given, and the event has one, show it
         if ((!settings.room || settings.room == "") && (e.room && e.room != "")) {
-            event_element_details2.innerText = e.room;
+            event_element_room.innerText = e.room;
+        }
+        // if we show the next event abstract and this is the next event..
+        if (settings.display_next_abstract && displayed_events == 0 && e.abstract && e.abstract.length > 5) {
+            event_element_details2.innerText = e.abstract + e.abstract + e.abstract + e.abstract + e.abstract ;
         }
         if (ntp) {
             // add CSS for old or current events
@@ -226,6 +241,7 @@ function renderCal() {
 // e.start
 // e.end
 // e.speaker
+// e.abstract
 
 // parse Google JSON to local storage format
 // TODO needs to be updated since migrated to new event format for frab
@@ -277,6 +293,7 @@ function frabSaveData(raw_data) {
                             e.title = event.title;
                             e.room = event.room;
                             e.room_clean = roomSanitize(e.room);
+                            e.abstract = event.abstract;
                             e.start = new Date(event.date);
                             var duration = moment.duration(event.duration);
                             var end = moment(event.date).add(duration).toDate();
@@ -302,6 +319,8 @@ function frabSaveData(raw_data) {
             dataStore['events'] = JSON.stringify(data);
             dataStore['updated'] = hash;
             renderCal();
+        } else {
+            //console.log("frab data unchanged");
         }
     }
 }

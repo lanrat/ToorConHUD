@@ -4,15 +4,19 @@
 
 // set default settings
 var settings = {
-    test: false,
-    testDate: new Date('2018/09/15 13:20'),
+    test: null,
     render_interval: 30*1000, // every 30s
     update_interval: 60*1000, // every 1 minutes
+    wallpaper_interval: 90*1000, // 90 sec
     display_old: true,
     single_day: true,
     max_display_events: 40,
     rotate: false,
-    room: ""
+    room: "",
+    wallpaper: ["img/TCBG.png"],
+    landscape: false,
+    display_next_abstract: false,
+    announcement: null,
 };
 
 // override default settings by screen ID
@@ -21,6 +25,12 @@ switch(id) {
     case "1":
         settings.room = "track1";
         settings.rotate = false;
+        settings.wallpaper = ["img/wall1.jpg", "img/wall2.jpg"];
+        settings.landscape = true;
+        settings.display_old = false;
+        settings.max_display_events = 3;
+        settings.display_next_abstract = true;
+        settings.announcement = "This is a test Announcement";
         break;
     case "2":
         settings.room = "track2";
@@ -45,9 +55,13 @@ if (r !=- "") {
 }
 
 // check for test
-var t = getQueryVariable("t");
-if (t != "") {
-    settings.test = true;
+var test = getQueryVariable("test");
+if (test != "") {
+    // test=2018/09/15-13:20
+    test = test.replace("-", " ")
+    settings.test = new Date(test)
+    console.log("Test mode activated to:", settings.test);
+    console.log(settings);
 }
 
 // check for room
@@ -56,12 +70,6 @@ if (s != "") {
     settings.room = s.toLowerCase();
 }
 
-if (settings.test) {
-    console.log("Test mode activated to:", settings.testDate);
-    console.log(settings);
-}
-
-
 // Google vars
 // https://developers.google.com/google-apps/calendar/v3/reference/events/list#parameters
 var GOOGCAL_API_KEY = 'AIzaSyAwQwg4O6M_G1hqWxsRJMMAohIm57WmhTI';
@@ -69,7 +77,7 @@ var max_google_results = 250;
 var goole_calendar_id = 'toorcon.org_fingd5s7evv78jsjdprf1ctvr4@group.calendar.google.com';
 var d = new Date();
 if (settings.test) {
-    d = settings.testDate;
+    d = settings.test;
 }
 var timeMin = ISODateString(new Date(d.getFullYear(), d.getMonth(), d.getDate())); // midnight
 var google_url = 'https://www.googleapis.com/calendar/v3/calendars/'+goole_calendar_id+'/events?key='+GOOGCAL_API_KEY+'&timeMin='+timeMin+'&mexResults='+max_google_results;
@@ -89,6 +97,16 @@ if (settings.rotate) {
     var m = document.getElementById("main");
     m.className += m.className ? ' rotate' : 'rotate';
 }
+
+// landscape?
+if (settings.landscape) {
+    var m = document.getElementById("main");
+    m.className += m.className ? ' landscape' : 'landscape';
+}
+
+// change the wallpaper
+updateWallpaper()
+setInterval(updateWallpaper, settings.wallpaper_interval)
 
 // start clock 
 update_clock();
