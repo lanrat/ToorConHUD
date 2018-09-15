@@ -44,6 +44,24 @@ switch(id) {
         settings.room = "track2";
         settings.rotate = true;
         break;
+    case "f3":
+        settings.room = "track1";
+        settings.wallpaper = ["img/wall1.jpg", "img/wall2.jpg"];
+        settings.landscape = true;
+        settings.display_old = false;
+        settings.max_display_events = 3;
+        settings.display_next_abstract = true;
+        settings.announcement = "Welcome to ToorCon XX!";
+        break;
+    case "f4":
+        settings.room = "track2";
+        settings.wallpaper = ["img/wall2.jpg", "img/wall1.jpg"];
+        settings.landscape = true;
+        settings.display_old = false;
+        settings.max_display_events = 3;
+        settings.display_next_abstract = true;
+        settings.announcement = "Welcome to ToorCon XX!";
+        break;
     default:
         // no id set...
 }
