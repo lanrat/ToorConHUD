@@ -123,14 +123,22 @@ function renderCal() {
     }
 
     // show announcement if any
-    if (settings.announcement) {
+    if (settings.announcement_id && settings.announcement_id > 0) {
+        document.getElementById("announcement").style.display = "block"; // unhide
+        var announcement_text = document.getElementById("announcement-text");
+        announcement_text.innerText = dataStore['announcement'];
+        //console.log("settings announcement", announcement_text.innerText);
+    } else {
+        document.getElementById("announcement").style.display = "none"; // hide
+    }
+    /*if (settings.announcement) {
         document.getElementById("announcement").style.display = "block"; // unhide
         var announcement_text = document.getElementById("announcement-text");
         announcement_text.innerText = settings.announcement;
         console.log("settings announcement", announcement_text.innerText);
     } else {
         document.getElementById("announcement").style.display = "none"; // hide
-    }
+    }*/
 
     var ntp = NTPUp();
     var now = getNow();
@@ -242,6 +250,7 @@ function renderCal() {
 // e.end
 // e.speaker
 // e.abstract
+// e.id
 
 // parse Google JSON to local storage format
 // TODO needs to be updated since migrated to new event format for frab
@@ -284,6 +293,7 @@ function frabSaveData(raw_data) {
             var frab_data = JSON.parse(raw_data);
             var data = [];
             var days = frab_data.schedule.conference.days;
+            //console.log("Calendar Updated", days);
             for (var i = 0; i < days.length; i++) {
                 for (var room in days[i].rooms) {
                     if (days[i].rooms.hasOwnProperty(room))
@@ -305,10 +315,15 @@ function frabSaveData(raw_data) {
                             people = people.substr(2)
                             e.speaker = people;
                             data.push(e);
+                            e.id = event.id
+                            //console.log(event);
+                            if (event.id == settings.announcement_id) {
+                                dataStore['announcement'] = event.abstract;
+                            }
                         }
                 }
             }
-            console.log(data);
+            //console.log(data);
 
             // sort
             data.sort(function(a, b) {

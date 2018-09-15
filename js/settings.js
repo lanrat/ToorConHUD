@@ -13,24 +13,24 @@ var settings = {
     max_display_events: 40,
     rotate: false,
     room: "",
-    wallpaper: ["img/TCBG.png"],
+    wallpaper: ["img/portraint.png"],
     landscape: false,
     display_next_abstract: false,
     announcement: null,
+    announcement_id: 147,
 };
 
 // override default settings by screen ID
 var id = getQueryVariable("id");
 switch(id) {
     case "1":
-        settings.room = "track1";
+        settings.room = "";
         settings.rotate = false;
-        settings.wallpaper = ["img/wall1.jpg", "img/wall2.jpg"];
+        settings.wallpaper = ["img/landscape.png"];
         settings.landscape = true;
         settings.display_old = false;
-        settings.max_display_events = 3;
-        settings.display_next_abstract = true;
-        settings.announcement = "Welcome to ToorCon XX!";
+        settings.max_display_events = 7;
+        settings.display_next_abstract = false;
         break;
     case "2":
         settings.room = "track2";
@@ -46,24 +46,23 @@ switch(id) {
         break;
     case "f3":
         settings.room = "track1";
-        settings.wallpaper = ["img/wall1.jpg", "img/wall2.jpg"];
+        settings.wallpaper = ["img/landscape.png"];
         settings.landscape = true;
         settings.display_old = false;
         settings.max_display_events = 3;
         settings.display_next_abstract = true;
-        settings.announcement = "Welcome to ToorCon XX!";
         break;
     case "f4": /* tape */
         settings.room = "track2";
-        settings.wallpaper = ["img/wall2.jpg", "img/wall1.jpg"];
+        settings.wallpaper = ["img/landscape.png"];
         settings.landscape = true;
         settings.display_old = false;
         settings.max_display_events = 3;
         settings.display_next_abstract = true;
-        settings.announcement = "Welcome to ToorCon XX! Reg Opens at 19:00";
         break;
     default:
         // no id set...
+        console.log("no id set")
 }
 
 // check for rotate

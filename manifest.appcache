@@ -1,11 +1,10 @@
 CACHE MANIFEST
-# reddit
+# toorcon
 
 CACHE:
 css/style.css
-img/TCBG.png
-img/wall1.jpg
-img/wall2.jpg
+img/landscape.png
+img/portraint.png
 js/schedule.js
 js/settings.js
 js/update.js
