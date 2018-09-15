@@ -29,7 +29,7 @@ switch(id) {
         settings.wallpaper = ["img/landscape.png"];
         settings.landscape = true;
         settings.display_old = false;
-        settings.max_display_events = 7;
+        settings.max_display_events = 6;
         settings.display_next_abstract = false;
         break;
     case "2":
