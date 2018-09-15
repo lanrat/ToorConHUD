@@ -30,7 +30,7 @@ switch(id) {
         settings.display_old = false;
         settings.max_display_events = 3;
         settings.display_next_abstract = true;
-        settings.announcement = "This is a test Announcement";
+        settings.announcement = "Welcome to ToorCon XX!";
         break;
     case "2":
         settings.room = "track2";
