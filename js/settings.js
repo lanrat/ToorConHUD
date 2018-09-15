@@ -45,7 +45,7 @@ switch(id) {
         settings.rotate = true;
         break;
     case "f3":
-        settings.room = "track1";
+        settings.room = "track2";
         settings.wallpaper = ["img/landscape.png"];
         settings.landscape = true;
         settings.display_old = false;
@@ -53,7 +53,7 @@ switch(id) {
         settings.display_next_abstract = true;
         break;
     case "f4": /* tape */
-        settings.room = "track2";
+        settings.room = "track1";
         settings.wallpaper = ["img/landscape.png"];
         settings.landscape = true;
         settings.display_old = false;
