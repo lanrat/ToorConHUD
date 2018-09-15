@@ -53,14 +53,14 @@ switch(id) {
         settings.display_next_abstract = true;
         settings.announcement = "Welcome to ToorCon XX!";
         break;
-    case "f4":
+    case "f4": /* tape */
         settings.room = "track2";
         settings.wallpaper = ["img/wall2.jpg", "img/wall1.jpg"];
         settings.landscape = true;
         settings.display_old = false;
         settings.max_display_events = 3;
         settings.display_next_abstract = true;
-        settings.announcement = "Welcome to ToorCon XX!";
+        settings.announcement = "Welcome to ToorCon XX! Reg Opens at 19:00";
         break;
     default:
         // no id set...
