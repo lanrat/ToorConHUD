@@ -314,12 +314,13 @@ function frabSaveData(raw_data) {
                             }
                             people = people.substr(2)
                             e.speaker = people;
-                            data.push(e);
                             e.id = event.id
                             //console.log(event);
                             if (event.id == settings.announcement_id) {
                                 dataStore['announcement'] = event.abstract;
+                                continue;
                             }
+                            data.push(e);
                         }
                 }
             }
