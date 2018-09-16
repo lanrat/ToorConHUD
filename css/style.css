@@ -178,6 +178,11 @@ body {
     display: none;
 }
 
+.announcement .event-box {
+    background-color: #2f7e90;
+    text-align: center;
+}
+
 .announcement p {
     margin: 0 15px;
 }
