@@ -123,7 +123,7 @@ function renderCal() {
     }
 
     // show announcement if any
-    if (settings.announcement_id && settings.announcement_id > 0) {
+    if (settings.announcement_id && settings.announcement_id > 0 && dataStore['announcement'] != "") {
         document.getElementById("announcement").style.display = "block"; // unhide
         var announcement_text = document.getElementById("announcement-text");
         announcement_text.innerText = dataStore['announcement'];
