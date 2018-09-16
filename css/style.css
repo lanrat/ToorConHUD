@@ -87,6 +87,7 @@ body {
 
 .event-time {
     padding: 8px;
+    font-weight: bold;
     text-align: center;
     float: left;
     font-family: monospace;
