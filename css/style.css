@@ -56,7 +56,7 @@ body {
     font-size: 3em;
     text-transform: uppercase;
     /*text-shadow: 3px 3px #000000;*/
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Roboto', monospace;
     color: #000000;
 }
 
