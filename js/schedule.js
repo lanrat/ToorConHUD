@@ -224,7 +224,7 @@ function renderCal() {
         }
         // if we show the next event abstract and this is the next event..
         if (settings.display_next_abstract && displayed_events == 0 && e.abstract && e.abstract.length > 5) {
-            event_element_details2.innerText = e.abstract + e.abstract + e.abstract + e.abstract + e.abstract ;
+            event_element_details2.innerText = e.abstract;
         }
         if (ntp) {
             // add CSS for old or current events
