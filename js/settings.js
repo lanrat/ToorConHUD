@@ -17,7 +17,7 @@ var settings = {
     landscape: false,
     display_next_abstract: false,
     announcement: null,
-    announcement_id: 9999,
+    announcement_id: 0,
 };
 
 // override default settings by screen ID
