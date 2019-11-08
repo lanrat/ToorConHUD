@@ -38,7 +38,7 @@ switch(id) {
         break;
     case "f1":
        //settings.room = "track1";
-        //settings.wallpaper = ["img/landscape.png"];
+        settings.wallpaper = ["img/landscape.png"];
         settings.landscape = true;
         settings.display_old = false;
         //settings.rotate = true;
@@ -60,7 +60,7 @@ switch(id) {
         break;
     case "f4": /* tape */
         //settings.room = "track1";
-        //settings.wallpaper = ["img/landscape.png"];
+        settings.wallpaper = ["img/landscape.png"];
         settings.landscape = true;
         settings.display_old = false;
         //settings.rotate = true;

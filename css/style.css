@@ -61,7 +61,7 @@ body {
 }
 
 .main-box {
-    /*background: rgba(208, 208, 208, .7);*/
+    background: rgba(80, 80, 80, 0.7);
     border-radius: 30px;
     margin-top: 300px;
     margin-bottom: 80px;
