@@ -310,7 +310,8 @@ function frabSaveData(raw_data) {
                             e.end = end;
                             var people = "";
                             for (var k = 0; k < event.persons.length; k++) {
-                                people = people + ", " + event.persons[k].public_name;
+                                //people = people + ", " + event.persons[k].public_name; // frab
+                                people = people + ", " + event.persons[k].name; // pretalx
                             }
                             people = people.substr(2)
                             e.speaker = people;

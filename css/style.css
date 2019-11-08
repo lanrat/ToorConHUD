@@ -61,11 +61,12 @@ body {
 }
 
 .main-box {
-    background: rgba(208, 208, 208, .7);
+    /*background: rgba(208, 208, 208, .7);*/
     border-radius: 30px;
-    margin-top: 250px;
+    margin-top: 300px;
     margin-bottom: 80px;
-    margin-left: 80px;
+    /*margin-left: 80px;*/
+    margin-left: 95px;
     margin-right: 80px;
     padding: 1em 0;
     /*height: 1500px;  /* hardcode height, remove this to make dynamic*/

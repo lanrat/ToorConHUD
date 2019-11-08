@@ -8,9 +8,9 @@ var settings = {
     render_interval: 30*1000, // every 30s
     update_interval: 60*1000, // every 1 minutes
     wallpaper_interval: 90*1000, // 90 sec
-    display_old: true,
+    display_old: false,
     single_day: true,
-    max_display_events: 40,
+    max_display_events: 14,
     rotate: false,
     room: "",
     wallpaper: ["img/portraint.png"],
@@ -45,19 +45,21 @@ switch(id) {
         settings.rotate = true;
         break;
     case "f3":
-        settings.room = "track2";
-        settings.wallpaper = ["img/landscape.png"];
-        settings.landscape = true;
+        //settings.room = "track2";
+        //settings.wallpaper = ["img/landscape.png"];
+        //settings.landscape = true;
         settings.display_old = false;
-        settings.max_display_events = 3;
+        settings.rotate = true;
+        settings.max_display_events = 13;
         settings.display_next_abstract = true;
         break;
     case "f4": /* tape */
-        settings.room = "track1";
-        settings.wallpaper = ["img/landscape.png"];
-        settings.landscape = true;
+        //settings.room = "track1";
+        //settings.wallpaper = ["img/landscape.png"];
+        //settings.landscape = true;
         settings.display_old = false;
-        settings.max_display_events = 3;
+        settings.rotate = true;
+        settings.max_display_events = 13;
         settings.display_next_abstract = true;
         break;
     default:
@@ -100,7 +102,7 @@ var timeMin = ISODateString(new Date(d.getFullYear(), d.getMonth(), d.getDate())
 var google_url = 'https://www.googleapis.com/calendar/v3/calendars/'+goole_calendar_id+'/events?key='+GOOGCAL_API_KEY+'&timeMin='+timeMin+'&mexResults='+max_google_results;
 
 // frab vars
-var frab_url = 'https://frab.toorcon.net/en/toorcon20/public/schedule.json';
+var frab_url = 'https://talks.toorcon.net/toorcon21/schedule/export/schedule.json';
 
 // gets new schedule data
 function updateFeed() {
