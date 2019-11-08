@@ -37,8 +37,13 @@ switch(id) {
         settings.rotate = false;
         break;
     case "f1":
-        settings.room = "track1";
-        settings.rotate = true;
+       //settings.room = "track1";
+        //settings.wallpaper = ["img/landscape.png"];
+        settings.landscape = true;
+        settings.display_old = false;
+        //settings.rotate = true;
+        settings.max_display_events = 7;
+        settings.display_next_abstract = true;
         break;
     case "f2":
         settings.room = "track2";
