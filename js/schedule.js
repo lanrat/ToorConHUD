@@ -294,6 +294,7 @@ function frabSaveData(raw_data) {
             var data = [];
             var days = frab_data.schedule.conference.days;
             //console.log("Calendar Updated", days);
+            var announcement_found = false;
             for (var i = 0; i < days.length; i++) {
                 for (var room in days[i].rooms) {
                     if (days[i].rooms.hasOwnProperty(room))
@@ -319,10 +320,14 @@ function frabSaveData(raw_data) {
                             //console.log(event);
                             if (event.id == settings.announcement_id) {
                                 dataStore['announcement'] = event.abstract;
+                                announcement_found = true;
                                 continue;
                             }
                             data.push(e);
                         }
+                }
+                if (!announcement_found) {
+                    dataStore['announcement'] = ""
                 }
             }
             //console.log(data);
