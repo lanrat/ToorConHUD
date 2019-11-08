@@ -42,7 +42,7 @@ switch(id) {
         settings.landscape = true;
         settings.display_old = false;
         //settings.rotate = true;
-        settings.max_display_events = 7;
+        settings.max_display_events = 6;
         settings.display_next_abstract = true;
         break;
     case "f2":
@@ -64,7 +64,7 @@ switch(id) {
         settings.landscape = true;
         settings.display_old = false;
         //settings.rotate = true;
-        settings.max_display_events = 7;
+        settings.max_display_events = 6;
         settings.display_next_abstract = true;
         break;
     default:
